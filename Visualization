@@ -1,0 +1,40 @@
+
+def monthly_spending_trend(df):
+    df["YearMonth"] = df["Date"].dt.to_period("M")
+    monthly_totals = df.groupby("YearMonth")["Amount"].sum()
+    monthly_totals.index = monthly_totals.index.to_timestamp()
+
+    plt.figure(figsize=(8, 4))
+    plt.plot(monthly_totals.index, monthly_totals.values, marker='o', linewidth=2)
+    plt.title("Monthly Spending Trend")
+    plt.xlabel("Month")
+    plt.ylabel("Total Spending")
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
+
+def spending_by_category(df):
+    category_totals = df.groupby("Category")["Amount"].sum().sort_values(ascending=False)
+
+    plt.figure(figsize=(8, 4))
+    category_totals.plot(kind="bar", color="skyblue")
+    plt.title("Spending by Category")
+    plt.xlabel("Category")
+    plt.ylabel("Total Spending")
+    plt.tight_layout()
+    plt.show()
+
+
+
+def spending_distribution(df):
+    category_totals = df.groupby("Category")["Amount"].sum()
+
+    plt.figure(figsize=(6, 6))
+    category_totals.plot.pie(autopct="%1.1f%%", startangle=90)
+    plt.title("Spending Distribution by Category")
+    plt.ylabel("")  
+    plt.tight_layout()
+    plt.show()
+
