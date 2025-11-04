@@ -5,7 +5,7 @@ from visualize import visualize_monthly_trend, pie_by_category, bar_by_category
 import pandas as pd
 
 def print_menu():
-    print("=== PMG FinTech App ===")
+    print("=== MPG FinTech App ===")
     print("0. Import a CSV File")
     print("1. View All Transactions")
     print("2. View Transactions by Date Range")

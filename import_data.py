@@ -39,6 +39,11 @@ class DataImportCleaning:
         # Change all column names to lowercase and underscores
         data.columns = [col.lower().replace(" ", "_") for col in data.columns]
         print("Columns after cleaning:", data.columns.tolist())
+        # If the CSV uses 'transaction_description', rename it to 'description' for consistency throughout the app
+        if 'transaction_description' in data.columns:
+            data['description'] = data['transaction_description']
+            data.drop(columns=['transaction_description'], inplace=True)
+
 
         # Check that all required columns are present
         for col in self.Required_cols:
